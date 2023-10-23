@@ -8,3 +8,17 @@ const user2 = User.createUser(1232, '1@email.com', 'a2');
 const user3 = User.createUser(1233, '1@email.com', 'a3');
 
 console.log(user0.Name, user1.Name, user2.Name, user3.Name);
+
+class SplitWise {
+    #users;
+    constructor() {
+        this.users = [];
+    }
+    get Users() {
+        return this.#users;
+    }
+    addUser() {
+        const user = User.createUser(1230, '1@email.com', 'a0');
+        this.#user.push(user);
+    }
+}
