@@ -50,5 +50,4 @@ class UserTransaction {
     }
 }
 
-let userTransaction1 = UserTransaction.createUserTransaction(1, 2, 3, 4);
-console.log(userTransaction1.TransactionId);
+export default UserTransaction;

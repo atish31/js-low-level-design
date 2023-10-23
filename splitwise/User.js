@@ -38,7 +38,4 @@ class User {
     }
 }
 
-const user0 = User.createUser(1230, 'a0@email.com', 'a0');
-const user1 = User.createUser(1231, 'a1@email.com', 'a1');
-const user2 = User.createUser(1232, 'a2@email.com', 'a2');
-const user3 = User.createUser(1233, 'a3@email.com', 'a3');
+export default User;

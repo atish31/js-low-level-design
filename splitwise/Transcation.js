@@ -41,5 +41,4 @@ class Transaction {
     }
 }
 
-let transaction1 = Transaction.createTransaction(1, 2, 3);
-console.log(transaction1.Payer, 'transaction');
+export default Transaction;
