@@ -1,0 +1,20 @@
+{
+  "name": "js-low-level-design",
+  "version": "1.0.0",
+  "description": "Low level design code examples with javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atish31/js-low-level-design.git"
+  },
+  "author": "atish",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/atish31/js-low-level-design/issues"
+  },
+  "type": "module",
+  "homepage": "https://github.com/atish31/js-low-level-design#readme"
+}
