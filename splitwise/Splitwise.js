@@ -11,14 +11,32 @@ console.log(user0.Name, user1.Name, user2.Name, user3.Name);
 
 class SplitWise {
     #users;
+    #transactions;
     constructor() {
         this.users = [];
+        this.transactions = [];
+    }
+    set Users(details) {
+        this.#users.push(user);
+    }
+    set Transactions(details) {
+        const transaction = Transaction.createTransaction(details.payer, details.payee, details.expenseType)
+        this.#transactions.push(transaction);
     }
     get Users() {
         return this.#users;
     }
-    addUser() {
-        const user = User.createUser(1230, '1@email.com', 'a0');
-        this.#user.push(user);
+    get Transactions() {
+        return this.#transactions;
+    }
+
+    addUser(details) {
+        const user = User.createUser(details);
+        this.#users.push(user);
+    }
+
+    addTransaction(details) {
+        const transaction = Transaction.createTransaction(details);
+        console.log(this.users, '/// user');
     }
 }

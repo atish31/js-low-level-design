@@ -1,27 +1,28 @@
 class User {
     #id;
-    #phone;
-    #email;
     #name;
+    #email;
+    #phone;
+    
     constructor() {
         this.#id = 1;
-    }   
-
+    } 
+    
+    set Name(name) {
+        this.#name = name;
+    }
+    set Email(email) {
+        this.#email = email;
+    }
     set Phone(phone) {
         this.#phone = phone;
     }
-    set Email(phone) {
-        this.#phone = phone;
-    }
-    set Name(phone) {
-        this.#phone = phone;
-    }
-
-    get Email() {
-        return this.#phone;
-    }
 
     get Name() {
+        return this.#phone;
+    }
+    
+    get Email() {
         return this.#phone;
     }
 
@@ -29,11 +30,11 @@ class User {
         return this.#phone;
     }
 
-    static createUser(phone, email, name) {
+    static createUser(userDetails) {
         let user = new User();
-        user.Phone = phone ;
-        user.Email = email;
-        user.Name = name;
+        user.Name = userDetails.name;
+        user.Email = userDetails.email;
+        user.Phone = userDetails.phone ;
         return user;
     }
 }

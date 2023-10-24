@@ -32,11 +32,11 @@ class Transaction {
         return this.#expenseType;
     }
 
-    static createTransaction(payer, payee, expenseType) {
+    static createTransaction(transactionDetails) {
         let transaction = new Transaction();
-        transaction.Payer = payer;
-        transaction.Payee = payee;
-        transaction.expenseType = expenseType;
+        transaction.Payer = transactionDetails.payer;
+        transaction.Payee = transactionDetails.payee;
+        transaction.expenseType = transactionDetails.expenseType;
         return transaction;
     }
 }
