@@ -37,6 +37,7 @@ class Transaction {
         transaction.Payer = transactionDetails.payer;
         transaction.Payee = transactionDetails.payee;
         transaction.expenseType = transactionDetails.expenseType;
+        transaction.Amount = transactionDetails.amount;
         return transaction;
     }
 }

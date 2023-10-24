@@ -1,4 +1,6 @@
 import SplitWise from "./Splitwise.js";
+import { Users } from "./constants.js";
+import { Transactions } from "./constants.js";
 
 const User = {
     user1: {
@@ -21,13 +23,13 @@ const User = {
         'email': 'a4@email.com',
         'phone': 4234,
     },
-}
+};
 
 const splitwise = new SplitWise();
-splitwise.addUser(User.user1);
-splitwise.addUser(User.user2);
-splitwise.addUser(User.user3);
-splitwise.addUser(User.user4);
+splitwise.addUser(Users.user1);
+splitwise.addUser(Users.user2);
+splitwise.addUser(Users.user3);
+splitwise.addUser(Users.user4);
 
 splitwise.addTransaction(User.user4);
 
