@@ -25,6 +25,7 @@ class SplitWise {
 
     addUser(details) {
         const user = User.createUser(details);
+        console.log(user.id, '###id');
         this.#users.push(user);
     }
 
