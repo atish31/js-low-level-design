@@ -8,10 +8,10 @@ for(const user of Users) {
     splitwise.addUser(user);
 }
 
-splitwise.addTransaction(Transactions.transaction1);
-splitwise.addTransaction(Transactions.transaction2);
-splitwise.addTransaction(Transactions.transaction3);
-splitwise.addTransaction(Transactions.transaction4);
+for(const transaction of Transactions) {
+    splitwise.addTransaction(transaction);
+}
+
 
 
 

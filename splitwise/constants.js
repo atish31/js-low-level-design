@@ -1,4 +1,4 @@
-export  const Users = [
+export const Users = [
     {
         'id': 'u1',
         'name': 'a1',
@@ -25,8 +25,8 @@ export  const Users = [
     },
 ];
 
-export  const Transactions = {
-    transaction1: {
+export const Transactions = [
+    {
         'id': 't1',
         'payer': 'u1',
         'payee': ['u2', 'u3', 'u4'],
@@ -34,7 +34,7 @@ export  const Transactions = {
         'distribution': null,
         'amount': 1000,
     },
-    transaction2: {
+    {
         'id': 't2',
         'payer': 'u1',
         'payee': ['u2', 'u3'],
@@ -42,7 +42,7 @@ export  const Transactions = {
         'distribution': [370, 880],
         'amount': 1250,
     },
-    transaction3: {
+    {
         'id': 't3',
         'payer': 'u4',
         'payee': ['u1', 'u2', 'u3'],
@@ -50,7 +50,7 @@ export  const Transactions = {
         'distribution': [40, 20, 20],
         'amount': 1200,
     },
-    transaction4: {
+    {
         'id': 't4',
         'payer': 'u1',
         'payee': ['u4'],
@@ -58,4 +58,4 @@ export  const Transactions = {
         'distribution': [200],
         'amount': 200,
     },
-};
+];
