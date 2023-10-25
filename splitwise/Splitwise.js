@@ -30,7 +30,31 @@ class SplitWise {
 
     addTransaction(details) {
         const transaction = Transaction.createTransaction(details);
-        console.log(transaction.ExpenseType, '/// transaction');
+        let userTransactions = {
+            'u1': {
+                'u2': 1,
+                'u3': 2,
+                'u4': 3,
+            }
+        };
+
+        if(transaction.Distribution === null) {
+            transaction.Distribution = this.calculateDistribution(transaction);
+        }
+
+        let payer = userTransactions[transaction.Payer];
+        for(let payee of transaction.Payee) {
+            let balance = payer[payee];
+            const index = transaction.Payee.indexOf(payee);
+            userTransactions[transaction.Payer][payee] = balance + transaction.Distribution[index];       
+         }
+    }
+
+    calculateDistribution(transaction) {
+        const payeeLength = transaction.Payee.length;
+        const equalAmount = (transaction.Amount / (payeeLength + 1));
+        const distribution = new Array(payeeLength).fill(equalAmount);
+        return distribution;
     }
 }
 
