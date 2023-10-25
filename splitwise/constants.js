@@ -1,29 +1,29 @@
-export  const Users = {
-    user1: {
+export  const Users = [
+    {
         'id': 'u1',
         'name': 'a1',
         'email': 'a1@email.com',
         'phone': 1234,
     },
-    user2: {
+    {
         'id': 'u2',
         'name': 'a2',
         'email': 'a2@email.com',
         'phone': 2234,
     },
-    user3: {
+    {
         'id': 'u3',
         'name': 'a3',
         'email': 'a3@email.com',
         'phone': 3234,
     },
-    user4: {
+    {
         'id': 'u4',
         'name': 'a4',
         'email': 'a4@email.com',
         'phone': 4234,
     },
-};
+];
 
 export  const Transactions = {
     transaction1: {
@@ -49,5 +49,13 @@ export  const Transactions = {
         'expenseType': 'percent',
         'distribution': [40, 20, 20],
         'amount': 1200,
+    },
+    transaction4: {
+        'id': 't4',
+        'payer': 'u1',
+        'payee': ['u4'],
+        'expenseType': 'exact',
+        'distribution': [200],
+        'amount': 200,
     },
 };
