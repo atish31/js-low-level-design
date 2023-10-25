@@ -16,7 +16,7 @@ class Transaction {
         this.#payee = payee;
     }
 
-    set expenseType(expenseType) {
+    set ExpenseType(expenseType) {
         this.#expenseType = expenseType;
     }
 
@@ -28,7 +28,7 @@ class Transaction {
         return this.#payee;
     }
 
-    get expenseType() {
+    get ExpenseType() {
         return this.#expenseType;
     }
 
@@ -36,7 +36,7 @@ class Transaction {
         let transaction = new Transaction();
         transaction.Payer = transactionDetails.payer;
         transaction.Payee = transactionDetails.payee;
-        transaction.expenseType = transactionDetails.expenseType;
+        transaction.ExpenseType = transactionDetails.expenseType;
         transaction.Amount = transactionDetails.amount;
         return transaction;
     }

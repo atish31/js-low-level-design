@@ -30,7 +30,7 @@ class SplitWise {
 
     addTransaction(details) {
         const transaction = Transaction.createTransaction(details);
-        console.log(transaction, '/// transaction');
+        console.log(transaction.ExpenseType, '/// transaction');
     }
 }
 
