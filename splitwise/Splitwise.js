@@ -32,10 +32,25 @@ class SplitWise {
         const transaction = Transaction.createTransaction(details);
         let userTransactions = {
             'u1': {
-                'u2': 1,
-                'u3': 2,
-                'u4': 3,
-            }
+                'u2': 0,
+                'u3': 0,
+                'u4': 0,
+            },
+            'u2': {
+                'u1': 0,
+                'u2': 0,
+                'u3': 0,
+            },
+            'u3': {
+                'u1': 0,
+                'u2': 0,
+                'u3': 0,
+            },
+            'u4': {
+                'u1': 0,
+                'u2': 0,
+                'u3': 0,
+            },
         };
 
         if(transaction.Distribution === null) {
@@ -44,10 +59,21 @@ class SplitWise {
 
         let payer = userTransactions[transaction.Payer];
         for(let payee of transaction.Payee) {
-            let balance = payer[payee];
+            let payerBalance = payer[payee];
+            let payeeBalance =  userTransactions[payee][transaction.Payer];
+            let balance = payerBalance + payeeBalance;
             const index = transaction.Payee.indexOf(payee);
-            userTransactions[transaction.Payer][payee] = balance + transaction.Distribution[index];       
+            let newAmount;
+            if(transaction.ExpenseType === 'percent') {
+                newAmount = (transaction.Distribution[index] / 100) * transaction.Amount;
+
+            } else {
+                newAmount = transaction.Distribution[index];
+            }
+            userTransactions[transaction.Payer][payee] = balance + newAmount;       
          }
+
+         console.log(userTransactions, 'transaction')
     }
 
     calculateDistribution(transaction) {
