@@ -1,4 +1,3 @@
-import GenerateId from "./GenerateId.js";
 class User {
     #id;
     #name;
@@ -7,7 +6,11 @@ class User {
     
     constructor() {
         this.#id = 0;
-    } 
+    }
+    
+    set id(id) {
+        this.#id = id;
+    }
     
     set Name(name) {
         this.#name = name;
@@ -17,6 +20,10 @@ class User {
     }
     set Phone(phone) {
         this.#phone = phone;
+    }
+
+    get id() {
+        return this.#id;
     }
 
     get Name() {
@@ -33,11 +40,9 @@ class User {
 
     static createUser(userDetails) {
         let user = new User();
-        user.id = GenerateId.getUserId();
-        user.Name = userDetails.name;
+        user.id = userDetails.id;
         user.Email = userDetails.email;
         user.Phone = userDetails.phone ;
-        console.log(user.id, '###id');
         return user;
     }
 }
