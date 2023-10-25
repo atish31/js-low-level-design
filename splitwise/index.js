@@ -9,4 +9,7 @@ splitwise.addUser(Users.user3);
 splitwise.addUser(Users.user4);
 
 splitwise.addTransaction(Transactions.transaction1);
+splitwise.addTransaction(Transactions.transaction2);
+splitwise.addTransaction(Transactions.transaction3);
+
 
