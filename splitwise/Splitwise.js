@@ -2,6 +2,29 @@ import User from "./User.js";
 import Transaction from "./Transcation.js";
 import UserTransaction from "./UserTransaction.js";
 
+let userTransactions = {
+    'u1': {
+        'u2': 0,
+        'u3': 0,
+        'u4': 0,
+    },
+    'u2': {
+        'u1': 0,
+        'u2': 0,
+        'u3': 0,
+    },
+    'u3': {
+        'u1': 0,
+        'u2': 0,
+        'u3': 0,
+    },
+    'u4': {
+        'u1': 0,
+        'u2': 0,
+        'u3': 0,
+    },
+};
+
 class SplitWise {
     #users;
     #transactions;
@@ -30,47 +53,31 @@ class SplitWise {
 
     addTransaction(details) {
         const transaction = Transaction.createTransaction(details);
-        let userTransactions = {
-            'u1': {
-                'u2': 0,
-                'u3': 0,
-                'u4': 0,
-            },
-            'u2': {
-                'u1': 0,
-                'u2': 0,
-                'u3': 0,
-            },
-            'u3': {
-                'u1': 0,
-                'u2': 0,
-                'u3': 0,
-            },
-            'u4': {
-                'u1': 0,
-                'u2': 0,
-                'u3': 0,
-            },
-        };
-
+        const payer = transaction.Payer;
+        const payerBalances = userTransactions[transaction.Payer];
+        const payeeList = transaction.Payee; 
+        const amount = transaction.Amount;
+        let newAmount;
         if(transaction.Distribution === null) {
             transaction.Distribution = this.calculateDistribution(transaction);
         }
-
-        let payer = userTransactions[transaction.Payer];
-        for(let payee of transaction.Payee) {
-            let payerBalance = payer[payee];
-            let payeeBalance =  userTransactions[payee][transaction.Payer];
-            let balance = payerBalance + payeeBalance;
-            const index = transaction.Payee.indexOf(payee);
-            let newAmount;
+        for(const payee of payeeList) {
+            const payerBalance = payerBalances[payee];
+            const payeeBalance =  userTransactions[payee][payer];
+            const index = payeeList.indexOf(payee);
             if(transaction.ExpenseType === 'percent') {
-                newAmount = (transaction.Distribution[index] / 100) * transaction.Amount;
-
+                newAmount = (transaction.Distribution[index] / 100) * amount;
             } else {
                 newAmount = transaction.Distribution[index];
             }
-            userTransactions[transaction.Payer][payee] = balance + newAmount;       
+
+            if(payerBalance >= amount) {
+                userTransactions[payer][payee] = payerBalance - amount;
+            } else {
+                 userTransactions[payee][payer] = newAmount + (payeeBalance || 0) - (payerBalance || 0);  
+                 userTransactions[payer][payee] = 0;
+            }
+
          }
 
          console.log(userTransactions, 'transaction')
