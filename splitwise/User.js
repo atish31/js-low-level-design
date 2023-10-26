@@ -4,10 +4,6 @@ class User {
     #email;
     #phone;
     
-    constructor() {
-        this.#id = 0;
-    }
-    
     set id(id) {
         this.#id = id;
     }

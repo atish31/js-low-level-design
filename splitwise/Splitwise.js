@@ -1,69 +1,52 @@
 import User from "./User.js";
 import Transaction from "./Transcation.js";
-import UserTransaction from "./UserTransaction.js";
-
-let userTransactions = {
-    'u1': {
-        'u2': 0,
-        'u3': 0,
-        'u4': 0,
-    },
-    'u2': {
-        'u1': 0,
-        'u2': 0,
-        'u3': 0,
-    },
-    'u3': {
-        'u1': 0,
-        'u2': 0,
-        'u3': 0,
-    },
-    'u4': {
-        'u1': 0,
-        'u2': 0,
-        'u3': 0,
-    },
-};
 
 class SplitWise {
-    #users;
-    #transactions;
     constructor() {
-        this.#users = [];
-        this.transactions = [];
-    }
-    set Users(details) {
-        this.#users.push(user);
-    }
-    set Transactions(details) {
-        const transaction = Transaction.createTransaction(details.payer, details.payee, details.expenseType)
-        this.#transactions.push(transaction);
-    }
-    get Users() {
-        return this.#users;
-    }
-    get Transactions() {
-        return this.#transactions;
+        this.users = [];
+        this.userTransactions = {};
     }
 
     addUser(details) {
         const user = User.createUser(details);
-        this.#users.push(user);
+        this.users.push(user.id); 
+    }
+
+    createUserTransancations() {
+        for(const user of this.users) {
+            const transacationsPerUser = this.users.reduce((accumulator, key) => {
+                if(key !== user) {
+                    accumulator[key] = 0;
+                }
+                return accumulator;
+            }, {});
+            this.userTransactions[user] = transacationsPerUser;
+        }
     }
 
     addTransaction(details) {
         const transaction = Transaction.createTransaction(details);
         const payer = transaction.Payer;
-        const payerBalances = userTransactions[transaction.Payer];
         const payeeList = transaction.Payee; 
+        const payeeObject = payeeList.reduce((accumulator, key) => {
+            accumulator[key] = 0;
+            return accumulator;
+        }, {});
+
+        const payerBalances = this.userTransactions[payer];
         const amount = transaction.Amount;
         let newAmount;
         if(transaction.Distribution === null) {
             transaction.Distribution = this.calculateDistribution(transaction);
         }
         for(const payee of payeeList) {
+            if(!this.userTransactions[payer][payee]) {
+                this.userTransactions[payer][payee] = 0;
+            } else if(!this.userTransactions[payee][payer]) {
+                this.userTransactions[payee][payer] = 0;
+            }
             const payerBalance = payerBalances[payee];
-            const payeeBalance =  userTransactions[payee][payer];
+            const payeeBalance =  this.userTransactions[payee][payer];
             const index = payeeList.indexOf(payee);
             if(transaction.ExpenseType === 'percent') {
                 newAmount = (transaction.Distribution[index] / 100) * amount;
@@ -72,15 +55,14 @@ class SplitWise {
             }
 
             if(payerBalance >= amount) {
-                userTransactions[payer][payee] = payerBalance - amount;
+                this.userTransactions[payer][payee] = payerBalance - amount;
             } else {
-                 userTransactions[payee][payer] = newAmount + (payeeBalance || 0) - (payerBalance || 0);  
-                 userTransactions[payer][payee] = 0;
+                 this.userTransactions[payee][payer] = newAmount + (payeeBalance || 0) - (payerBalance || 0);  
+                 this.userTransactions[payer][payee] = 0;
             }
-
          }
 
-         console.log(userTransactions, 'transaction')
+         console.log(this.userTransactions, 'transaction')
     }
 
     calculateDistribution(transaction) {
