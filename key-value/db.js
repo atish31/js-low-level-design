@@ -4,7 +4,9 @@ class Db {
     }
 
     insertIntodb(keyValue) {
-        this.db.push();
+        this.db.push(keyValue);
         console.log(this.db, 'dbdbdb');
     }
 }
+
+export default Db;

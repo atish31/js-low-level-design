@@ -1,10 +1,12 @@
 class Value {
      #value;
-     set Value(value) {
-        this.#value = value;
+     set Value(_value) {
+        this.#value = _value;
      }
 
      get Value () {
-        return this.value;
+        return this.#value;
      }
 }
+
+export default Value;

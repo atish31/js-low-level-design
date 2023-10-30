@@ -1,9 +1,6 @@
-import Key from  'Key.js';
-import Value from 'Value.js';
 
 class KeyValue {
     #keyValue
-
     setKeyValuePair(key, value) {
         this.#keyValue = {
             key: value
@@ -15,3 +12,5 @@ class KeyValue {
         return this.#keyValue;
     }
 }
+
+export default KeyValue;
