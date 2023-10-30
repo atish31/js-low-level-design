@@ -2,7 +2,7 @@ import Key from "./Key.js";
 import Value from './Value.js';
 import KeyValuePair from './key-value.js';
 import Db from './db.js';
-// import SplitWise from "./Splitwise.js";
+import readline from 'readline';
 
 
 const keyInsatance = new Key;
@@ -18,6 +18,25 @@ function insertIntoDb(key, value) {
     db.insertIntodb(keyValuePair);
 }
 
-insertIntoDb('a', 'b');
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+});
+
+
+rl.question('TYPE YOUR COMMAND: ', (input) => {
+    if(input = 'PUT') {
+        createKeyValuePair();
+    }
+});
+
+function createKeyValuePair() {
+    rl.question('KEY:', (key) => {
+        rl.question('VALUE:', (value) => {
+            insertIntoDb(key, value);
+        });
+    });
+}
 
 
